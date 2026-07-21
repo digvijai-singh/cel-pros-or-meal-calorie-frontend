@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# XcelPros – Meal Calorie Count Generator
+
+A production-ready frontend application built using **Next.js 16+ App Router**, **TypeScript**, and **Tailwind CSS**. It connects to a live backend at `https://xpcc.devb.zeak.io` to manage authentication and retrieve real-time calorie lookup reports and nutrient ratios powered by USDA database records.
+
+## Features
+
+- **User Authentication**: Secure user registration and login with local-storage-persisted JWT tokens.
+- **Route Guarding**: Protected routes (`/dashboard` and `/calories`) that verify session token existence and refresh automatically.
+- **Calorie Lookup & Analysis**: A serving-aware query form for looking up dish nutrition profiles.
+- **Visual Nutrient Ratios**: Colored energy distribution ratios (protein, carbohydrates, fats) and detailed breakdown tables for ingredients.
+- **Persistent Search Logs**: Dashboard search log table containing the history of past queries with timestamps.
+- **Rate Limit Resilience**: Full integration with `429 Too Many Requests` headers, showing real-time countdown lockouts on forms.
+- **Visual Themes**: Beautiful responsive shell layouts adapting to system-preferred or user-pinned light and dark modes.
+
+---
+
+## Tech Decisions & Trade-Offs
+
+- **Next.js 16 App Router**: Leveraged for fast, modern routing and layouts. To manage authentication status (which is browser-dependent via localStorage) cleanly and avoid hydration mismatches, we implemented client-side mounting checks and hydration-aware route redirections.
+- **State Management (Zustand)**: Used Zustand with `persist` middleware. It has a tiny footprint and allows reactive component updates without complex providers or boilerplate.
+- **Forms (React Hook Form + Zod)**: Implemented Zod schemas for forms validation to guarantee runtime correctness and immediate client-side error indicators before fetching.
+- **Tailwind CSS v4 & Theme Switcher**: Tailwind CSS v4 defines configurations directly inside the `@theme` css context, which we utilized to build custom-themed shadcn/ui properties for light and dark classes.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Environment Setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Create a `.env.local` file at the root of the project:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=https://xpcc.devb.zeak.io
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A template is also available in `.env.example`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Install project dependencies using `pnpm`:
 
-## Learn More
+```bash
+pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Run Development Server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## Deploy on Vercel
+### 4. Build for Production
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To check compilation and build the optimized production package:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm build
+pnpm start
+```
+
+---
+
+## Running with Docker
+
+You can run the application inside a container using Docker Compose:
+
+```bash
+# Build and run container
+docker-compose up --build
+
+# Open browser at http://localhost:3000
+```
+
+---
+
+## Testing
+
+The test suite is built using **Vitest** and **React Testing Library** to mock API calls and verify DOM rendering.
+
+Run all tests:
+
+```bash
+pnpm test
+```
+
+---
+
+## Directory Structure
+
+```text
+src/
+├── app/                  # Next.js pages, layouts, and route definitions
+├── components/           # Shared interface elements (AuthForm, ResultCard, etc.)
+├── hooks/                # Custom React hooks (useAuthGuard)
+├── lib/                  # Helper utilities (api client, zod validation schemas)
+├── stores/               # Zustand state stores (authStore, mealStore)
+└── types/                # Shared TypeScript definitions
+```
+
+---
+
+## Key Page Flow Diagrams
+
+- **Root (/)**: Redirects to `/dashboard` if authenticated; redirects to `/login` if unauthenticated.
+- **Login (/login) & Register (/register)**: Authentication views rendering the `AuthForm`. If already logged in, redirects to `/dashboard` immediately.
+- **Dashboard (/dashboard)**: Shows greeting, profile details, and recent search logs.
+- **Lookup (/calories)**: Main utility form allowing users to look up calorie values and inspect detailed report breakdowns.
+
+---
+
+## Deployment & URLs
+
+- **Hosted URL**: [https://xpcc-calorie-generator.vercel.app](https://xpcc-calorie-generator.vercel.app) *(Placeholder)*
