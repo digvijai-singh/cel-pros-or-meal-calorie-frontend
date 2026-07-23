@@ -8,6 +8,7 @@ import { getCalories, ApiError } from "@/lib/api";
 import { MealFormSchema, MealFormInput } from "@/lib/validations";
 import { Loader2, AlertTriangle, Search, History } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const PRESET_SUGGESTIONS = [
   "Grilled Salmon",
@@ -25,7 +26,8 @@ const PRESET_SUGGESTIONS = [
 ];
 
 export function MealForm() {
-  const setResult = useMealStore((state) => state.setResult);
+  const setTempResult = useMealStore((state) => state.setTempResult);
+  const router = useRouter();
   const [apiError, setApiError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [retryCountdown, setRetryCountdown] = useState<number | null>(null);
@@ -72,7 +74,8 @@ export function MealForm() {
 
     try {
       const res = await getCalories(data);
-      setResult(res);
+      setTempResult(res);
+      router.push("/calories/log");
     } catch (error: any) {
       if (error instanceof ApiError) {
         if (error.status === 400) {

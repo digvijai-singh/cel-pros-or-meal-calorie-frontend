@@ -7,10 +7,12 @@ import { ResultCard } from "@/components/ResultCard";
 import { Loader2, Apple, Lightbulb, History } from "lucide-react";
 import { motion } from "framer-motion";
 import { CalorieResult } from "@/types";
+import { useRouter } from "next/navigation";
 
 export default function CaloriesPage() {
   const { isAuthorized } = useAuthGuard();
   const { lastResult, history } = useMealStore();
+  const router = useRouter();
 
   if (!isAuthorized) {
     return (
@@ -28,7 +30,8 @@ export default function CaloriesPage() {
     .slice(0, 3);
 
   const handleSelectRelated = (result: CalorieResult) => {
-    useMealStore.setState({ lastResult: result });
+    useMealStore.getState().setTempResult(result);
+    router.push("/calories/log");
   };
 
   const fmt = (val?: number) => (val !== undefined ? Number(val).toFixed(0) : "-");
