@@ -53,7 +53,7 @@ export function Header() {
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
                     pathname === "/dashboard"
                       ? "bg-slate-100 dark:bg-slate-800 text-primary shadow-tactile-pressed"
-                      : "text-slate-655 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                   }`}
                 >
                   <LayoutDashboard className="w-4 h-4" />
@@ -67,7 +67,7 @@ export function Header() {
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
                     pathname === "/calories"
                       ? "bg-slate-100 dark:bg-slate-800 text-primary shadow-tactile-pressed"
-                      : "text-slate-655 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                   }`}
                 >
                   <Apple className="w-4 h-4" />
@@ -94,7 +94,7 @@ export function Header() {
                     className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
                       pathname === "/login"
                         ? "bg-slate-100 dark:bg-slate-800 text-primary shadow-tactile-pressed"
-                        : "text-slate-655 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                        : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                     }`}
                   >
                     <LogIn className="w-4 h-4" />
@@ -108,7 +108,7 @@ export function Header() {
                     className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
                       pathname === "/register"
                         ? "bg-slate-100 dark:bg-slate-800 text-primary shadow-tactile-pressed"
-                        : "text-slate-655 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                        : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                     }`}
                   >
                     <UserPlus className="w-4 h-4" />

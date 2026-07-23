@@ -22,7 +22,7 @@ describe("MealForm Component", () => {
   it("shows validation error for empty fields", async () => {
     render(<MealForm />);
     
-    const submitButton = screen.getByRole("button", { name: /Lookup Calories/i });
+    const submitButton = screen.getByRole("button", { name: /Lookup Meal/i });
     fireEvent.click(submitButton);
 
     expect(await screen.findByText("Dish name is required")).toBeInTheDocument();
@@ -31,9 +31,9 @@ describe("MealForm Component", () => {
   it("shows validation error for negative servings", async () => {
     render(<MealForm />);
 
-    const dishInput = screen.getByLabelText(/Dish or Food Name/i);
-    const servingsInput = screen.getByLabelText(/Number of Servings/i);
-    const submitButton = screen.getByRole("button", { name: /Lookup Calories/i });
+    const dishInput = screen.getByLabelText(/Dish Name/i);
+    const servingsInput = screen.getByLabelText(/Servings/i);
+    const submitButton = screen.getByRole("button", { name: /Lookup Meal/i });
 
     fireEvent.change(dishInput, { target: { value: "Apple Pie" } });
     fireEvent.change(servingsInput, { target: { value: "-2" } });
@@ -53,9 +53,9 @@ describe("MealForm Component", () => {
 
     render(<MealForm />);
 
-    const dishInput = screen.getByLabelText(/Dish or Food Name/i);
-    const servingsInput = screen.getByLabelText(/Number of Servings/i);
-    const submitButton = screen.getByRole("button", { name: /Lookup Calories/i });
+    const dishInput = screen.getByLabelText(/Dish Name/i);
+    const servingsInput = screen.getByLabelText(/Servings/i);
+    const submitButton = screen.getByRole("button", { name: /Lookup Meal/i });
 
     fireEvent.change(dishInput, { target: { value: "Apple" } });
     fireEvent.change(servingsInput, { target: { value: "1" } });

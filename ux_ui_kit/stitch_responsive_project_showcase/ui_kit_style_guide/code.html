@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meal Calorie Studio | UI Kit &amp; Style Guide</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e1e2e4",
+                      "outline-variant": "#c1c6d6",
+                      "on-secondary-container": "#007432",
+                      "secondary-container": "#6bff8f",
+                      "on-surface": "#191c1e",
+                      "surface": "#f8f9fb",
+                      "surface-container-low": "#f3f4f6",
+                      "tertiary-fixed": "#ffddb8",
+                      "on-secondary-fixed": "#002109",
+                      "on-secondary": "#ffffff",
+                      "background-light": "#F3F4F6",
+                      "background-dark": "#020617",
+                      "primary": "#005bbf",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#a66900",
+                      "text-primary": "#111827",
+                      "on-tertiary-fixed": "#2a1700",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#2e3132",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-dim": "#d9dadc",
+                      "secondary-fixed": "#6bff8f",
+                      "on-tertiary-container": "#ffffff",
+                      "text-secondary": "#4B5563",
+                      "secondary-fixed-dim": "#4ae176",
+                      "inverse-on-surface": "#f0f1f3",
+                      "tertiary": "#845300",
+                      "primary-container": "#1a73e8",
+                      "error-red": "#EF4444",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "surface-bright": "#f8f9fb",
+                      "on-tertiary-fixed-variant": "#653e00",
+                      "surface-container": "#edeef0",
+                      "on-secondary-fixed-variant": "#005321",
+                      "on-primary-fixed": "#001a41",
+                      "primary-fixed-dim": "#adc7ff",
+                      "primary-fixed": "#d8e2ff",
+                      "on-primary-fixed-variant": "#004493",
+                      "surface-light": "#FFFFFF",
+                      "surface-container-highest": "#e1e2e4",
+                      "inverse-primary": "#adc7ff",
+                      "on-surface-variant": "#414754",
+                      "tertiary-fixed-dim": "#ffb95f",
+                      "on-background": "#191c1e",
+                      "background": "#f8f9fb",
+                      "outline": "#727785",
+                      "secondary": "#006e2f",
+                      "on-primary-container": "#ffffff",
+                      "surface-dark": "#0B1120",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#e7e8ea",
+                      "surface-tint": "#005bc0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "32px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "stack-lg": "32px",
+                      "stack-sm": "8px",
+                      "container-max": "1280px",
+                      "stack-md": "16px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Hanken Grotesk"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "stat-lg": ["Hanken Grotesk"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "body-sm": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "headline-sm": ["Hanken Grotesk"],
+                      "body-md": ["Hanken Grotesk"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "stat-lg": ["28px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .skeuo-raised {
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .dark .skeuo-raised {
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .skeuo-pressed {
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.08), inset -2px -2px 5px rgba(255, 255, 255, 0.4);
+        }
+
+        .dark .skeuo-pressed {
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5), inset -1px -1px 2px rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary-skeuo {
+            background: linear-gradient(to bottom, #1a73e8, #005bbf);
+            box-shadow: 0 8px 18px rgba(26, 115, 232, 0.3);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary-skeuo:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(26, 115, 232, 0.2);
+        }
+
+        .tactile-chip {
+            background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.15) 0%, transparent 60%), var(--tw-bg-opacity);
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low dark:bg-background-dark min-h-screen transition-colors duration-300">
+<!-- TopNavBar -->
+<nav class="h-[64px] w-full sticky top-0 z-50 bg-gradient-to-b from-white to-surface-container-low dark:from-surface-dark dark:to-surface-dim shadow-[0_18px_40px_rgba(15,23,42,0.08)] border-b border-white/20">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Meal Calorie Studio</span>
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full font-label-md text-label-md hidden md:block">v1.0.0 UI KIT</span>
+</div>
+<div class="flex items-center gap-stack-sm">
+<button class="p-2 rounded-xl hover:bg-surface-container-high/50 dark:hover:bg-surface-variant/20 transition-all active:scale-95" onclick="toggleTheme()">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" id="theme-icon">dark_mode</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female UX designer with a warm smile, wearing modern glasses, set against a soft blurred studio background with warm lighting, capturing a clean and trustworthy aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu5_mCl4BGgoyYqRzpekanWNj_wQNEeqoSG_pR-JHz6k7cPlZC7zWEoSoO-tTPmtSTWJ54kg8LMslPs-v7_iA4rZ6FCWTsSIvQzXl2vJ_IVyz4p_X2zBiQcj4CtHwnLQ7nBPspgZLEjvcAkm7Y0KyYn9GF890sHLBVOZC1OttuS8_ae5Q4OjeOfun41Z-yRUjPJQUgStV2VllleZOC_yatYbTAFbFgPoXkwh1dfNkof06HTP3jAj6EGiRL5sM_S7BGmjkqcLuzyYA"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+<!-- Hero Section: Brand Identity -->
+<header class="mb-20">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="md:col-span-7 flex flex-col justify-center">
+<h1 class="font-headline-lg text-headline-lg text-text-primary dark:text-surface-light mb-stack-md">Tactile Health Identity</h1>
+<p class="font-body-lg text-body-lg text-text-secondary dark:text-on-surface-variant max-w-2xl leading-relaxed">
+                        The Meal Calorie Studio design system, <span class="text-primary font-bold">"Google Skeuomorphism,"</span> bridges clinical data precision with physical warmth. Every interaction is designed to feel like pressing a high-quality glass button on a medical-grade device.
+                    </p>
+</div>
+<div class="md:col-span-5">
+<div class="bg-surface-light dark:bg-surface-dark p-stack-lg rounded-2xl skeuo-raised flex flex-col items-center justify-center gap-stack-md relative overflow-hidden">
+
+<div class="relative z-10 flex flex-col items-center gap-4">
+<span class="material-symbols-outlined text-[64px] text-primary" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<div class="text-center">
+<p class="font-headline-md text-headline-md text-primary font-extrabold uppercase tracking-tighter">Studio Pro</p>
+<p class="font-label-md text-label-md text-text-secondary tracking-widest">DESIGN COMPENDIUM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Bento Grid: Typography & Color -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-20">
+<!-- Typography Scale -->
+<div class="md:col-span-8 bg-surface-light dark:bg-surface-dark rounded-2xl p-stack-lg skeuo-raised">
+<h2 class="font-headline-sm text-headline-sm text-text-primary dark:text-surface-light mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">format_size</span>
+                    Typography Scale
+                </h2>
+<div class="space-y-10">
+<div class="border-b border-outline-variant pb-4">
+<p class="text-label-md font-label-md text-outline mb-2">Headline Large (H1)</p>
+<p class="font-headline-lg text-headline-lg text-text-primary dark:text-surface-light">The quick brown fox jumps.</p>
+</div>
+<div class="border-b border-outline-variant pb-4">
+<p class="text-label-md font-label-md text-outline mb-2">Headline Medium (H2)</p>
+<p class="font-headline-md text-headline-md text-text-primary dark:text-surface-light">Nutritional tracking made physical.</p>
+</div>
+<div class="border-b border-outline-variant pb-4">
+<p class="text-label-md font-label-md text-outline mb-2">Stat Large (Key Metrics)</p>
+<p class="font-stat-lg text-stat-lg text-primary">2,450 kcal / 120g Protein</p>
+</div>
+<div class="border-b border-outline-variant pb-4">
+<p class="text-label-md font-label-md text-outline mb-2">Body Large</p>
+<p class="font-body-lg text-body-lg text-text-secondary dark:text-on-surface-variant">Focusing on clarity and readability, Hanken Grotesk provides a modern, friendly touch to complex data sets.</p>
+</div>
+</div>
+</div>
+<!-- Color Palette -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-stack-lg skeuo-raised flex-1">
+<h2 class="font-headline-sm text-headline-sm text-text-primary dark:text-surface-light mb-6">Core Palette</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<div class="h-16 w-full rounded-xl bg-primary shadow-lg border border-white/20"></div>
+<p class="font-label-md text-label-md text-text-primary dark:text-surface-light">Primary</p>
+<p class="text-[10px] text-outline">#005BBF</p>
+</div>
+<div class="space-y-2">
+<div class="h-16 w-full rounded-xl bg-secondary shadow-lg border border-white/20"></div>
+<p class="font-label-md text-label-md text-text-primary dark:text-surface-light">Success</p>
+<p class="text-[10px] text-outline">#006E2F</p>
+</div>
+<div class="space-y-2">
+<div class="h-16 w-full rounded-xl bg-error shadow-lg border border-white/20"></div>
+<p class="font-label-md text-label-md text-text-primary dark:text-surface-light">Error</p>
+<p class="text-[10px] text-outline">#BA1A1A</p>
+</div>
+<div class="space-y-2">
+<div class="h-16 w-full rounded-xl bg-surface-container-high shadow-inner border border-outline-variant"></div>
+<p class="font-label-md text-label-md text-text-primary dark:text-surface-light">Surface</p>
+<p class="text-[10px] text-outline">#E7E8EA</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-stack-lg skeuo-raised flex-1">
+<h2 class="font-headline-sm text-headline-sm text-text-primary dark:text-surface-light mb-4">Depth Tokens</h2>
+<div class="space-y-4">
+<div class="p-3 bg-white dark:bg-surface-variant/10 rounded-xl skeuo-raised">
+<p class="font-label-md text-label-md text-primary">Elevated Level 1</p>
+</div>
+<div class="p-3 bg-white dark:bg-surface-variant/10 rounded-xl skeuo-pressed">
+<p class="font-label-md text-label-md text-outline">Recessed Level 1</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Components Showcase -->
+<section class="mb-20">
+<h2 class="font-headline-lg text-headline-lg text-text-primary dark:text-surface-light mb-stack-lg">Interactive Library</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Buttons -->
+<div class="bg-surface-light dark:bg-surface-dark p-stack-lg rounded-2xl skeuo-raised">
+<p class="font-label-md text-label-md text-outline mb-6">BUTTONS &amp; ACTIONS</p>
+<div class="flex flex-col gap-6">
+<button class="h-[52px] w-full rounded-xl text-white font-bold btn-primary-skeuo flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_circle</span>
+                            Primary Action
+                        </button>
+<button class="h-[52px] w-full rounded-xl border border-outline-variant bg-surface-light dark:bg-surface-dark text-text-primary dark:text-surface-light font-bold skeuo-raised flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+                            Secondary Action
+                        </button>
+<div class="flex gap-4">
+<button class="flex-1 h-12 rounded-xl bg-error-container text-on-error-container font-bold text-sm skeuo-raised active:scale-95 transition-transform">Cancel</button>
+<button class="flex-1 h-12 rounded-xl bg-secondary-container text-on-secondary-container font-bold text-sm skeuo-raised active:scale-95 transition-transform">Confirm</button>
+</div>
+</div>
+</div>
+<!-- Inputs -->
+<div class="bg-surface-light dark:bg-surface-dark p-stack-lg rounded-2xl skeuo-raised">
+<p class="font-label-md text-label-md text-outline mb-6">INPUT STATES</p>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Default Input</label>
+<div class="relative">
+<input class="w-full h-12 bg-surface-container-lowest dark:bg-surface-dark border border-outline-variant rounded-xl px-4 font-body-md text-body-md skeuo-pressed focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="Search meals..." type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-3 text-outline">search</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Active Selection</label>
+<div class="flex gap-2">
+<div class="px-4 py-2 bg-primary-container text-on-primary-container rounded-full font-label-md text-label-md flex items-center gap-2 skeuo-raised">
+                                    Protein <span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div class="px-4 py-2 bg-surface-container-high text-text-secondary rounded-full font-label-md text-label-md skeuo-raised">
+                                    Fat
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Progress & Stats -->
+<div class="bg-surface-light dark:bg-surface-dark p-stack-lg rounded-2xl skeuo-raised">
+<p class="font-label-md text-label-md text-outline mb-6">INDICATORS</p>
+<div class="space-y-8">
+<div class="space-y-3">
+<div class="flex justify-between font-label-md text-label-md">
+<span class="text-text-primary dark:text-surface-light">Daily Calorie Goal</span>
+<span class="text-primary font-bold">75%</span>
+</div>
+<div class="h-4 w-full bg-surface-container rounded-full overflow-hidden skeuo-pressed relative">
+<div class="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-primary to-primary-container rounded-full shadow-[0_0_12px_rgba(26,115,232,0.4)]"></div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 bg-surface-container-low dark:bg-surface-variant/5 rounded-xl skeuo-pressed">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center skeuo-raised">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-text-primary dark:text-surface-light">Step Target Met</p>
+<p class="text-[10px] text-outline uppercase tracking-wider">Completed Today</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Iconography Grid -->
+<section class="mb-20">
+<div class="flex justify-between items-end mb-stack-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-text-primary dark:text-surface-light">Tactile Iconography</h2>
+<p class="font-body-md text-body-md text-text-secondary dark:text-on-surface-variant">Icons shift visual weight and fill-state based on theme and importance.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-stack-md">
+<!-- Icon Cell Template -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/5 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-primary">dashboard</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Dashboard</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/5 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-primary" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Meals</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/5 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-primary">analytics</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Analytics</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/5 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-primary">settings</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Settings</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/5 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-primary">person</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Profile</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/5 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-primary">query_stats</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Stats</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/5 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-primary">fastfood</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Fast Food</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/5 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-primary">home</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Home</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-secondary/10 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-secondary">check</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Checkmark</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-error/10 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-error">warning</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Warning</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/5 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-primary">light_mode</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Light Mode</span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl skeuo-raised flex flex-col items-center gap-4 transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/5 rounded-xl">
+<span class="material-symbols-outlined text-[32px] text-primary">dark_mode</span>
+</div>
+<span class="font-label-md text-label-md text-text-secondary dark:text-on-surface-variant">Dark Mode</span>
+</div>
+</div>
+</section>
+<!-- Data Visualization Elements -->
+<section class="mb-20">
+<h2 class="font-headline-lg text-headline-lg text-text-primary dark:text-surface-light mb-stack-lg">Macro Components</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Protein Card -->
+<div class="relative overflow-hidden bg-surface-light dark:bg-surface-dark p-stack-lg rounded-2xl skeuo-raised">
+<div class="absolute top-0 left-0 w-24 h-24 bg-primary/5 rounded-br-full -translate-x-8 -translate-y-8 blur-2xl"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-16 h-16 rounded-full tactile-chip bg-primary/10 flex items-center justify-center mb-4 skeuo-raised">
+<span class="material-symbols-outlined text-primary text-3xl">fitness_center</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-text-primary dark:text-surface-light">Protein</p>
+<p class="font-stat-lg text-stat-lg text-primary mt-2">142g</p>
+<p class="font-label-md text-label-md text-outline mt-1">42% OF DAILY GOAL</p>
+</div>
+</div>
+<!-- Carbs Card -->
+<div class="relative overflow-hidden bg-surface-light dark:bg-surface-dark p-stack-lg rounded-2xl skeuo-raised">
+<div class="absolute top-0 left-0 w-24 h-24 bg-tertiary/5 rounded-br-full -translate-x-8 -translate-y-8 blur-2xl"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-16 h-16 rounded-full tactile-chip bg-tertiary/10 flex items-center justify-center mb-4 skeuo-raised">
+<span class="material-symbols-outlined text-tertiary text-3xl">grain</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-text-primary dark:text-surface-light">Carbs</p>
+<p class="font-stat-lg text-stat-lg text-tertiary mt-2">210g</p>
+<p class="font-label-md text-label-md text-outline mt-1">35% OF DAILY GOAL</p>
+</div>
+</div>
+<!-- Fat Card -->
+<div class="relative overflow-hidden bg-surface-light dark:bg-surface-dark p-stack-lg rounded-2xl skeuo-raised">
+<div class="absolute top-0 left-0 w-24 h-24 bg-secondary/5 rounded-br-full -translate-x-8 -translate-y-8 blur-2xl"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-16 h-16 rounded-full tactile-chip bg-secondary/10 flex items-center justify-center mb-4 skeuo-raised">
+<span class="material-symbols-outlined text-secondary text-3xl">opacity</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-text-primary dark:text-surface-light">Fats</p>
+<p class="font-stat-lg text-stat-lg text-secondary mt-2">64g</p>
+<p class="font-label-md text-label-md text-outline mt-1">23% OF DAILY GOAL</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Developer Handoff Footer -->
+<footer class="mt-32 pt-12 border-t border-outline-variant text-center pb-20">
+<div class="flex flex-col items-center gap-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-4xl">code</span>
+<h3 class="font-headline-md text-headline-md text-text-primary dark:text-surface-light">Developer Implementation</h3>
+</div>
+<p class="font-body-md text-body-md text-text-secondary dark:text-on-surface-variant max-w-xl mx-auto">
+                    All components are built using utility-first Tailwind classes referencing the <span class="text-primary font-bold">Meal Calorie Studio Theme Config</span>. Use the <code class="bg-surface-container-high px-2 py-1 rounded">skeuo-*</code> classes for consistent depth.
+                </p>
+<div class="flex gap-4">
+<a class="flex items-center gap-2 font-label-md text-label-md text-primary hover:underline" href="#">
+                        DOCUMENTATION.PDF <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+<a class="flex items-center gap-2 font-label-md text-label-md text-primary hover:underline" href="#">
+                        ASSETS_PACK.ZIP <span class="material-symbols-outlined text-[16px]">download</span>
+</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- Theme Toggle Functionality -->
+<script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.innerText = 'dark_mode';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.innerText = 'light_mode';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check for saved theme preference
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            const icon = document.getElementById('theme-icon');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                icon.innerText = 'light_mode';
+            }
+        });
+    </script>
+</body></html>

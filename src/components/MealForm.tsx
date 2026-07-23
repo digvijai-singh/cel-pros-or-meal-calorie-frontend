@@ -6,19 +6,37 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMealStore } from "@/stores/mealStore";
 import { getCalories, ApiError } from "@/lib/api";
 import { MealFormSchema, MealFormInput } from "@/lib/validations";
-import { Loader2, AlertTriangle, Search } from "lucide-react";
-import { motion } from "framer-motion";
+import { Loader2, AlertTriangle, Search, History } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const PRESET_SUGGESTIONS = [
+  "Grilled Salmon",
+  "Paneer Butter Masala",
+  "Chicken Biryani",
+  "Avocado Toast",
+  "Caesar Salad",
+  "Oatmeal",
+  "Protein Shake",
+  "Greek Yogurt",
+  "Mixed Nuts",
+  "Butter Chicken",
+  "Garlic Naan",
+  "Mixed Salad"
+];
 
 export function MealForm() {
   const setResult = useMealStore((state) => state.setResult);
   const [apiError, setApiError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [retryCountdown, setRetryCountdown] = useState<number | null>(null);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const {
     register,
     handleSubmit,
     setError,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<MealFormInput>({
     resolver: zodResolver(MealFormSchema) as any,
@@ -27,6 +45,8 @@ export function MealForm() {
       servings: 1,
     },
   });
+
+  const dishNameValue = watch("dish_name") || "";
 
   useEffect(() => {
     if (retryCountdown === null) return;
@@ -48,6 +68,7 @@ export function MealForm() {
 
     setIsLoading(true);
     setApiError(null);
+    setShowDropdown(false);
 
     try {
       const res = await getCalories(data);
@@ -78,6 +99,10 @@ export function MealForm() {
     }
   };
 
+  const filteredSuggestions = PRESET_SUGGESTIONS.filter((item) =>
+    item.toLowerCase().includes(dishNameValue.toLowerCase())
+  );
+
   const isFormDisabled = isLoading || (retryCountdown !== null && retryCountdown > 0);
 
   return (
@@ -87,42 +112,77 @@ export function MealForm() {
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
       className="skeuo-card p-6 border border-slate-200/20 dark:border-slate-800/30"
     >
-      <div className="flex items-center gap-3 mb-4">
-        <div className="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center text-white skeuo-button border-none">
-          <Search className="w-5 h-5" />
+      <div className="flex items-center gap-3 mb-5 border-b border-slate-100 dark:border-slate-850 pb-3">
+        <div className="w-8 h-8 bg-primary-container rounded-xl flex items-center justify-center text-white skeuo-button border-none">
+          <Search className="w-4 h-4" />
         </div>
-        <h2 className="text-xl font-headline font-bold text-slate-800 dark:text-white">Calorie Lookup</h2>
+        <h2 className="text-base font-headline font-bold text-slate-800 dark:text-white">Meal Calorie Lookup</h2>
       </div>
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 font-body">
-        <div>
-          <label htmlFor="dish_name" className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
-            Dish or Food Name
+        {/* Dish Name with Autocomplete */}
+        <div className="relative w-full">
+          <label htmlFor="dish_name" className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+            Dish Name
           </label>
           <input
             id="dish_name"
             type="text"
             {...register("dish_name")}
-            className="w-full px-3.5 py-2.5 border skeuo-input text-slate-800 dark:text-white focus:ring-0 outline-none text-sm"
-            placeholder="e.g., Pepperoni Pizza, Caesar Salad, Oatmeal"
+            autoComplete="off"
+            className="w-full h-[48px] px-4 border skeuo-input text-slate-800 dark:text-white focus:ring-0 outline-none text-sm"
+            placeholder="e.g., Grilled salmon or Chicken Biryani"
             disabled={isFormDisabled}
+            onFocus={() => setShowDropdown(true)}
+            onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
           />
+          
+          <AnimatePresence>
+            {showDropdown && dishNameValue.length >= 1 && filteredSuggestions.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                transition={{ duration: 0.15 }}
+                className="absolute left-0 w-full z-50 mt-2 bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 rounded-xl shadow-[0_15px_35px_rgba(15,23,42,0.12)] dark:shadow-[0_15px_35px_rgba(0,0,0,0.6)] overflow-hidden"
+              >
+                <div className="p-1 space-y-0.5 max-h-48 overflow-y-auto scroller">
+                  {filteredSuggestions.map((suggestion) => (
+                    <button
+                      key={suggestion}
+                      type="button"
+                      onMouseDown={() => {
+                        setValue("dish_name", suggestion);
+                        setShowDropdown(false);
+                      }}
+                      className="w-full text-left px-3.5 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-lg transition-colors text-xs font-bold flex items-center gap-2 cursor-pointer focus:outline-none"
+                    >
+                      <History className="w-3.5 h-3.5 text-slate-400" />
+                      <span>{suggestion}</span>
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {errors.dish_name && (
             <p className="text-[10px] text-red-500 mt-1 font-semibold">{errors.dish_name.message}</p>
           )}
         </div>
 
+        {/* Servings */}
         <div>
-          <label htmlFor="servings" className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">
-            Number of Servings
+          <label htmlFor="servings" className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+            Servings
           </label>
           <input
             id="servings"
             type="number"
             step="any"
             {...register("servings")}
-            className="w-full px-3.5 py-2.5 border skeuo-input text-slate-800 dark:text-white focus:ring-0 outline-none text-sm"
-            placeholder="e.g., 1, 1.5, 2.5"
+            className="w-full h-[48px] px-4 border skeuo-input text-slate-800 dark:text-white focus:ring-0 outline-none text-sm"
+            placeholder="e.g., 1, 2"
             disabled={isFormDisabled}
           />
           {errors.servings && (
@@ -148,24 +208,29 @@ export function MealForm() {
           </motion.div>
         )}
 
-        <motion.button
-          whileHover={isFormDisabled ? {} : { scale: 1.01, y: -1 }}
-          whileTap={isFormDisabled ? {} : { scale: 0.98, y: 1 }}
-          type="submit"
-          disabled={isFormDisabled}
-          className="w-full flex items-center justify-center gap-2 py-3 px-4 skeuo-button text-white font-bold rounded-xl transition-all cursor-pointer text-sm"
-        >
-          {isLoading ? (
-            <>
-              <Loader2 className="w-4 h-4 animate-spin" />
-              <span>Analyzing Dish...</span>
-            </>
-          ) : retryCountdown !== null && retryCountdown > 0 ? (
-            <span>Locked ({retryCountdown}s)</span>
-          ) : (
-            <span>Lookup Calories</span>
-          )}
-        </motion.button>
+        <div className="pt-2">
+          <motion.button
+            whileHover={isFormDisabled ? {} : { scale: 1.01, y: -1 }}
+            whileTap={isFormDisabled ? {} : { scale: 0.98, y: 1 }}
+            type="submit"
+            disabled={isFormDisabled}
+            className="w-full h-[48px] flex items-center justify-center gap-2 skeuo-button text-white font-bold rounded-xl transition-all cursor-pointer text-sm"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span>Calculating...</span>
+              </>
+            ) : retryCountdown !== null && retryCountdown > 0 ? (
+              <span>Locked ({retryCountdown}s)</span>
+            ) : (
+              <>
+                <Search className="w-4 h-4" />
+                <span>Lookup Meal</span>
+              </>
+            )}
+          </motion.button>
+        </div>
       </form>
     </motion.div>
   );

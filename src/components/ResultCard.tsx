@@ -113,7 +113,7 @@ export function ResultCard({ result }: ResultCardProps) {
                   title={`Fat: ${fmt(fatPct)}%`} 
                 />
               </div>
-              <div className="flex justify-between mt-2.5 text-[10px] font-bold text-slate-450 uppercase tracking-wider">
+              <div className="flex justify-between mt-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                 <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm" /> Carbs</span>
                 <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-indigo-500 shadow-sm" /> Protein</span>
                 <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm" /> Fats</span>
@@ -121,9 +121,8 @@ export function ResultCard({ result }: ResultCardProps) {
             </div>
           </div>
 
-          {/* Macro grid */}
           <div className="space-y-4">
-            <h3 className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider flex items-center gap-1.5 font-body">
+            <h3 className="text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5 font-body">
               <Award className="w-4 h-4 text-indigo-500" /> Macronutrient Details
             </h3>
             
@@ -131,25 +130,25 @@ export function ResultCard({ result }: ResultCardProps) {
               {/* Protein */}
               <div className="bg-slate-50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-100 dark:border-slate-850 text-center relative overflow-hidden skeuo-pill">
                 <div className="macro-chip-highlight bg-indigo-500" />
-                <p className="text-[10px] text-slate-400 dark:text-slate-550 uppercase font-bold">Protein</p>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Protein</p>
                 <p className="text-lg font-extrabold text-indigo-500 mt-1">{fmt(macronutrients_per_serving?.protein)}g</p>
-                <p className="text-[9px] font-semibold text-slate-450 mt-0.5">Total: {fmt(total_macronutrients?.protein)}g</p>
+                <p className="text-[9px] font-semibold text-slate-500 mt-0.5">Total: {fmt(total_macronutrients?.protein)}g</p>
               </div>
 
               {/* Carbs */}
               <div className="bg-slate-50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-100 dark:border-slate-850 text-center relative overflow-hidden skeuo-pill">
                 <div className="macro-chip-highlight bg-amber-400" />
-                <p className="text-[10px] text-slate-400 dark:text-slate-550 uppercase font-bold">Carbs</p>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Carbs</p>
                 <p className="text-lg font-extrabold text-amber-500 mt-1">{fmt(macronutrients_per_serving?.carbohydrates)}g</p>
-                <p className="text-[9px] font-semibold text-slate-450 mt-0.5">Total: {fmt(total_macronutrients?.carbohydrates)}g</p>
+                <p className="text-[9px] font-semibold text-slate-500 mt-0.5">Total: {fmt(total_macronutrients?.carbohydrates)}g</p>
               </div>
 
               {/* Fats */}
               <div className="bg-slate-50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-100 dark:border-slate-850 text-center relative overflow-hidden skeuo-pill">
                 <div className="macro-chip-highlight bg-rose-500" />
-                <p className="text-[10px] text-slate-400 dark:text-slate-550 uppercase font-bold">Fats</p>
+                <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold">Fats</p>
                 <p className="text-lg font-extrabold text-rose-500 mt-1">{fmt(macronutrients_per_serving?.total_fat)}g</p>
-                <p className="text-[9px] font-semibold text-slate-450 mt-0.5">Total: {fmt(total_macronutrients?.total_fat)}g</p>
+                <p className="text-[9px] font-semibold text-slate-500 mt-0.5">Total: {fmt(total_macronutrients?.total_fat)}g</p>
               </div>
             </div>
 
@@ -158,24 +157,24 @@ export function ResultCard({ result }: ResultCardProps) {
               macronutrients_per_serving?.sugars !== undefined ||
               macronutrients_per_serving?.saturated_fat !== undefined) && (
               <div className="concave-display p-3.5 border border-slate-200/20 dark:border-slate-850/50 space-y-2 font-body">
-                <p className="text-[10px] font-bold text-slate-400 dark:text-slate-550 uppercase tracking-wider">Additional Information</p>
+                <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Additional Information</p>
                 <div className="grid grid-cols-3 gap-2 text-[11px]">
                   {macronutrients_per_serving?.fiber !== undefined && (
                     <div>
-                      <span className="text-slate-450 block font-semibold">Fiber:</span>
-                      <span className="font-bold text-slate-800 dark:text-slate-200">{fmt(macronutrients_per_serving.fiber)}g ({fmt(total_macronutrients?.fiber)}g)</span>
+                      <span className="text-slate-600 dark:text-slate-400 block font-bold">Fiber:</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-250">{fmt(macronutrients_per_serving.fiber)}g ({fmt(total_macronutrients?.fiber)}g)</span>
                     </div>
                   )}
                   {macronutrients_per_serving?.sugars !== undefined && (
                     <div>
-                      <span className="text-slate-450 block font-semibold">Sugars:</span>
-                      <span className="font-bold text-slate-800 dark:text-slate-200">{fmt(macronutrients_per_serving.sugars)}g ({fmt(total_macronutrients?.sugars)}g)</span>
+                      <span className="text-slate-600 dark:text-slate-400 block font-bold">Sugars:</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-250">{fmt(macronutrients_per_serving.sugars)}g ({fmt(total_macronutrients?.sugars)}g)</span>
                     </div>
                   )}
                   {macronutrients_per_serving?.saturated_fat !== undefined && (
                     <div>
-                      <span className="text-slate-450 block font-semibold">Sat. Fat:</span>
-                      <span className="font-bold text-slate-800 dark:text-slate-200">{fmt(macronutrients_per_serving.saturated_fat)}g ({fmt(total_macronutrients?.saturated_fat)}g)</span>
+                      <span className="text-slate-600 dark:text-slate-400 block font-bold">Sat. Fat:</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-250">{fmt(macronutrients_per_serving.saturated_fat)}g ({fmt(total_macronutrients?.saturated_fat)}g)</span>
                     </div>
                   )}
                 </div>
@@ -206,25 +205,25 @@ export function ResultCard({ result }: ResultCardProps) {
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-850/80">
                 {ingredient_breakdown.map((item, idx) => (
-                  <motion.tr 
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: idx * 0.05 }}
-                    key={idx} 
-                    className="hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-all duration-200 glass-row"
-                  >
-                    <td className="py-3.5 px-4 font-bold text-slate-700 dark:text-slate-200 text-sm">{item.name}</td>
-                    <td className="py-3.5 px-3 text-right text-amber-500 font-bold">{fmt(item.calories_per_100g)} kcal</td>
-                    <td className="py-3.5 px-3 text-right text-indigo-500 font-bold">{fmt(item.macronutrients_per_100g?.protein)}g</td>
-                    <td className="py-3.5 px-3 text-right text-rose-500 font-bold">{fmt(item.macronutrients_per_100g?.total_fat)}g</td>
-                    <td className="py-3.5 px-3 text-right text-amber-500 font-bold">{fmt(item.macronutrients_per_100g?.carbohydrates)}g</td>
-                    <td className="py-3.5 px-3 text-right text-slate-450 font-semibold">{fmt(item.serving_size)}g</td>
-                    <td className="py-3.5 px-4 text-center">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[9px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-450 border border-slate-200/50 dark:border-slate-700/50 shadow-inner">
-                        {item.fdc_id} ({item.data_type})
-                      </span>
-                    </td>
-                  </motion.tr>
+                   <motion.tr 
+                     initial={{ opacity: 0, y: 8 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     transition={{ duration: 0.3, delay: idx * 0.05 }}
+                     key={idx} 
+                     className="hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-all duration-200 glass-row"
+                   >
+                     <td className="py-3.5 px-4 font-bold text-slate-800 dark:text-slate-205 text-sm">{item.name}</td>
+                     <td className="py-3.5 px-3 text-right text-amber-600 dark:text-amber-500 font-bold">{fmt(item.calories_per_100g)} kcal</td>
+                     <td className="py-3.5 px-3 text-right text-indigo-650 dark:text-indigo-500 font-bold">{fmt(item.macronutrients_per_100g?.protein)}g</td>
+                     <td className="py-3.5 px-3 text-right text-rose-600 dark:text-rose-500 font-bold">{fmt(item.macronutrients_per_100g?.total_fat)}g</td>
+                     <td className="py-3.5 px-3 text-right text-amber-600 dark:text-amber-500 font-bold">{fmt(item.macronutrients_per_100g?.carbohydrates)}g</td>
+                     <td className="py-3.5 px-3 text-right text-slate-600 dark:text-slate-400 font-semibold">{fmt(item.serving_size)}g</td>
+                     <td className="py-3.5 px-4 text-center">
+                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-lg text-[9px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-700/50 shadow-inner">
+                         {item.fdc_id} ({item.data_type})
+                       </span>
+                     </td>
+                   </motion.tr>
                 ))}
               </tbody>
             </table>
@@ -234,9 +233,9 @@ export function ResultCard({ result }: ResultCardProps) {
 
       {/* Matched Food Metadata */}
       {matched_food && (
-        <div className="p-4 bg-slate-50 dark:bg-slate-900/55 border border-slate-200/40 dark:border-slate-850/50 rounded-2xl flex flex-col sm:flex-row justify-between text-[11px] text-slate-500 dark:text-slate-400 gap-2 font-body shadow-sm">
+        <div className="p-4 bg-slate-50 dark:bg-slate-900/55 border border-slate-200/40 dark:border-slate-850/50 rounded-2xl flex flex-col sm:flex-row justify-between text-[11px] text-slate-600 dark:text-slate-400 gap-2 font-body shadow-sm">
           <div>
-            <span className="font-bold text-slate-700 dark:text-slate-350">Matched Reference:</span> {matched_food.name}
+            <span className="font-bold text-slate-800 dark:text-slate-300">Matched Reference:</span> {matched_food.name}
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <span><strong>FDC ID:</strong> {matched_food.fdc_id}</span>
