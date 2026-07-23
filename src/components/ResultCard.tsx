@@ -1,8 +1,10 @@
 "use client";
 
 import { CalorieResult } from "@/types";
-import { Info, Database, Apple, Activity, Award } from "lucide-react";
+import { Info, Database, Apple, Activity, Award, Plus } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useMealStore } from "@/stores/mealStore";
 
 interface ResultCardProps {
   result: CalorieResult | null;
@@ -180,6 +182,21 @@ export function ResultCard({ result }: ResultCardProps) {
                 </div>
               </div>
             )}
+
+            {/* Log Meal CTA Button */}
+            <div className="mt-6 border-t border-slate-150 dark:border-slate-800 pt-5">
+              <Link href="/calories/log" passHref legacyBehavior>
+                <motion.a 
+                  onClick={() => useMealStore.getState().setTempResult(result)}
+                  whileHover={{ scale: 1.01, y: -0.5 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full h-11 btn-skeuo-primary rounded-xl text-white font-bold flex items-center justify-center gap-2 cursor-pointer text-xs shadow-md"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Log this Meal</span>
+                </motion.a>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
