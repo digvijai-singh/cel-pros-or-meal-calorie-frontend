@@ -212,14 +212,15 @@ body {
   border-color: #1a73e8;
 }
 
-.skeuo-button {
+.skeuo-button, .btn-skeuo-primary {
   background: linear-gradient(180deg, #1a73e8 0%, #005bbf 100%);
   box-shadow: 0 8px 18px rgba(26, 115, 232, 0.35), inset 0 1px 0 rgba(255,255,255,0.25);
   border-top: 1px solid rgba(255, 255, 255, 0.35);
+  color: white;
   transition: transform 0.1s, box-shadow 0.1s;
 }
 
-.skeuo-button:active {
+.skeuo-button:active, .btn-skeuo-primary:active {
   transform: translateY(2px);
   box-shadow: 0 2px 4px rgba(26, 115, 232, 0.2), inset 0 2px 4px rgba(0,0,0,0.15);
 }
