@@ -6,6 +6,7 @@ import { useAuthStore } from "@/stores/authStore";
 import { ThemeToggle } from "./ThemeToggle";
 import { LogOut, LayoutDashboard, Apple, LogIn, UserPlus } from "lucide-react";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export function Header() {
   const pathname = usePathname();
@@ -22,80 +23,97 @@ export function Header() {
     router.push("/login");
   };
 
-  // Prevent flash of unauthenticated header links during hydration
   const isLoggedIn = mounted && !!user;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-        {/* Logo/Brand */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="p-2 bg-amber-500 rounded-xl text-white shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform duration-250">
+    <header className="sticky top-0 z-50 w-full h-[64px] bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 shadow-[0_10px_30px_rgba(15,23,42,0.04)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.2)] transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between gap-4">
+        {/* Brand */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <motion.div 
+            whileHover={{ scale: 1.05, rotate: 5 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center text-white skeuo-button border-none cursor-pointer"
+          >
             <Apple className="w-5 h-5 fill-current" />
-          </div>
-          <span className="font-extrabold text-lg text-slate-800 dark:text-white tracking-tight group-hover:text-amber-500 transition-colors">
-            XP Calorie Count
+          </motion.div>
+          <span className="font-headline font-bold text-lg text-primary tracking-tight group-hover:text-primary-dark transition-colors">
+            Meal Calorie Studio
           </span>
         </Link>
 
         {/* Navigation */}
-        <nav className="flex items-center gap-1.5 sm:gap-3">
+        <nav className="flex items-center gap-1.5 sm:gap-2.5">
           {isLoggedIn ? (
             <>
-              <Link
-                href="/dashboard"
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
-                  pathname === "/dashboard"
-                    ? "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white"
-                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                }`}
-              >
-                <LayoutDashboard className="w-4 h-4" />
-                <span className="hidden sm:inline">Dashboard</span>
+              <Link href="/dashboard" passHref legacyBehavior>
+                <motion.a
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
+                    pathname === "/dashboard"
+                      ? "bg-slate-100 dark:bg-slate-800 text-primary shadow-tactile-pressed"
+                      : "text-slate-655 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                  }`}
+                >
+                  <LayoutDashboard className="w-4 h-4" />
+                  <span className="hidden sm:inline">Dashboard</span>
+                </motion.a>
               </Link>
-              <Link
-                href="/calories"
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
-                  pathname === "/calories"
-                    ? "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white"
-                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                }`}
-              >
-                <Apple className="w-4 h-4" />
-                <span>Lookup</span>
+              <Link href="/calories" passHref legacyBehavior>
+                <motion.a
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
+                    pathname === "/calories"
+                      ? "bg-slate-100 dark:bg-slate-800 text-primary shadow-tactile-pressed"
+                      : "text-slate-655 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                  }`}
+                >
+                  <Apple className="w-4 h-4" />
+                  <span>Lookup</span>
+                </motion.a>
               </Link>
-              <button
+              <motion.button
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={handleLogout}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-all cursor-pointer"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-semibold text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-all cursor-pointer"
               >
                 <LogOut className="w-4 h-4" />
                 <span className="hidden sm:inline">Sign Out</span>
-              </button>
+              </motion.button>
             </>
           ) : (
             mounted && (
               <>
-                <Link
-                  href="/login"
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
-                    pathname === "/login"
-                      ? "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                  }`}
-                >
-                  <LogIn className="w-4 h-4" />
-                  <span>Sign In</span>
+                <Link href="/login" passHref legacyBehavior>
+                  <motion.a
+                    whileHover={{ y: -1 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
+                      pathname === "/login"
+                        ? "bg-slate-100 dark:bg-slate-800 text-primary shadow-tactile-pressed"
+                        : "text-slate-655 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                    }`}
+                  >
+                    <LogIn className="w-4 h-4" />
+                    <span>Sign In</span>
+                  </motion.a>
                 </Link>
-                <Link
-                  href="/register"
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
-                    pathname === "/register"
-                      ? "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                  }`}
-                >
-                  <UserPlus className="w-4 h-4" />
-                  <span>Register</span>
+                <Link href="/register" passHref legacyBehavior>
+                  <motion.a
+                    whileHover={{ y: -1 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
+                      pathname === "/register"
+                        ? "bg-slate-100 dark:bg-slate-800 text-primary shadow-tactile-pressed"
+                        : "text-slate-655 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                    }`}
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    <span>Register</span>
+                  </motion.a>
                 </Link>
               </>
             )

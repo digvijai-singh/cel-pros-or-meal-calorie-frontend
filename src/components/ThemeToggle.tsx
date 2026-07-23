@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -13,24 +14,26 @@ export function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return <div className="w-9 h-9" />;
+    return <div className="w-10 h-10" />;
   }
 
   const currentTheme = theme === "system" ? resolvedTheme : theme;
   const isDark = currentTheme === "dark";
 
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.05, y: -1 }}
+      whileTap={{ scale: 0.95, y: 1 }}
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="p-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
+      className="w-10 h-10 rounded-xl bg-white dark:bg-surface-dark border-t border-white/85 dark:border-white/10 text-slate-800 dark:text-slate-200 shadow-tactile-raised dark:shadow-tactile-dark-raised flex items-center justify-center focus:outline-none cursor-pointer"
       aria-label="Toggle dark mode"
       id="theme-toggle-btn"
     >
       {isDark ? (
-        <Sun className="w-5 h-5 text-amber-500 animate-pulse" />
+        <Sun className="w-5 h-5 text-amber-500" />
       ) : (
         <Moon className="w-5 h-5 text-indigo-500" />
       )}
-    </button>
+    </motion.button>
   );
 }
