@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Log Multi-Item Meal - Meal Calorie Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#a66900",
+                    "secondary-fixed-dim": "#4ae176",
+                    "on-secondary-fixed": "#002109",
+                    "text-primary": "#111827",
+                    "surface-tint": "#005bc0",
+                    "surface-dim": "#d9dadc",
+                    "primary": "#005bbf",
+                    "on-tertiary-fixed": "#2a1700",
+                    "inverse-surface": "#2e3132",
+                    "error-red": "#EF4444",
+                    "on-background": "#191c1e",
+                    "primary-container": "#1a73e8",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e1e2e4",
+                    "tertiary": "#845300",
+                    "outline-variant": "#c1c6d6",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#ffffff",
+                    "background-dark": "#020617",
+                    "on-surface": "#191c1e",
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary": "#ffffff",
+                    "outline": "#727785",
+                    "surface-light": "#FFFFFF",
+                    "surface-container": "#edeef0",
+                    "surface-bright": "#f8f9fb",
+                    "tertiary-fixed": "#ffddb8",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#adc7ff",
+                    "surface-variant": "#e1e2e4",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#007432",
+                    "inverse-primary": "#adc7ff",
+                    "on-surface-variant": "#414754",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "on-primary-container": "#ffffff",
+                    "surface-container-high": "#e7e8ea",
+                    "background-light": "#F3F4F6",
+                    "on-secondary-fixed-variant": "#005321",
+                    "secondary-container": "#6bff8f",
+                    "secondary": "#006e2f",
+                    "background": "#f8f9fb",
+                    "on-error-container": "#93000a",
+                    "surface-dark": "#0B1120",
+                    "inverse-on-surface": "#f0f1f3",
+                    "on-primary-fixed": "#001a41",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f3f4f6",
+                    "text-secondary": "#4B5563",
+                    "secondary-fixed": "#6bff8f",
+                    "surface": "#f8f9fb",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "on-primary-fixed-variant": "#004493"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "32px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-sm": ["Hanken Grotesk"],
+                    "stat-lg": ["Hanken Grotesk"],
+                    "headline-sm": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "body-md": ["Hanken Grotesk"],
+                    "label-md": ["Inter"],
+                    "body-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "stat-lg": ["28px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F3F4F6;
+            font-family: 'Hanken Grotesk', sans-serif;
+            color: #191c1e;
+        }
+
+        .tactile-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .tactile-button {
+            height: 52px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(180deg, #1a73e8 0%, #005bbf 100%);
+            box-shadow: 0 8px 18px rgba(26, 115, 232, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: none;
+        }
+
+        .tactile-button:active {
+            transform: translateY(2px);
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1) inset;
+        }
+
+        .recessed-input {
+            background-color: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            padding: 12px 16px;
+            transition: border-color 0.2s;
+        }
+
+        .recessed-input:focus {
+            outline: none;
+            border-color: #005bbf;
+            box-shadow: 0 0 0 2px rgba(0, 91, 191, 0.1);
+        }
+
+        .macro-chip {
+            border-radius: 9999px;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .progress-channel {
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            box-shadow: 0 0 8px rgba(26, 115, 232, 0.4);
+            transition: width 0.5s ease-out;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen">
+<!-- TopNavBar -->
+<header class="h-[64px] w-full sticky top-0 z-50 bg-gradient-to-b from-white to-surface-container-low dark:from-surface-dark dark:to-surface-dim shadow-[0_18px_40px_rgba(15,23,42,0.08)] border-b border-white/20">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Meal Calorie Studio</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary py-4 font-label-md text-label-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high/50 transition-colors px-2 py-4 rounded-lg font-label-md text-label-md" href="#">Meal Log</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high/50 transition-colors px-2 py-4 rounded-lg font-label-md text-label-md" href="#">Nutrition</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high/50 transition-colors active:scale-95 duration-200" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined text-on-surface-variant">dark_mode</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white font-bold overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional, friendly headshot of a person for a user profile avatar. The lighting is soft and warm, set against a clean, minimalist medical or tech office background. The overall style is high-fidelity and matches a modern health application aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrA2uxcAkGdC27n4ITnm2Dcv7YklrKaPEYDGAVGTLBIstKnJBAaKv0wThKss7XrKuI5vbz3vQrnRbeiTdYT2qsI51CeWkX1Bi_EVDovF3wVK3_UE1AchznJzGTCx_To_733WlCc2l_e35mvuqAKPk6K5T4uIxCmkSJnDcQTrYKtyWZY_hoKv2csewZ3Ss_eO2_zlDeF9bLtDL8Wg4xCHyzpxpHYeModDepswwDeM2YynarrV6Dt1CYCebLH8MLaq5haA6EOZVPYDc"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+<div class="flex flex-col md:flex-row gap-gutter">
+<!-- Left Pane: Individual Items -->
+<div class="md:w-7/12 flex flex-col gap-stack-md">
+<div class="mb-4">
+<h1 class="font-headline-lg text-headline-lg text-text-primary dark:text-surface-bright">Analyze Meal</h1>
+<p class="text-text-secondary dark:text-on-surface-variant">Search result: "Coke with Mac and Cheese and Fries"</p>
+</div>
+<!-- Item Card: Mac and Cheese -->
+<div class="tactile-card p-stack-md flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-xl bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A delicious, gourmet serving of creamy macaroni and cheese in a rustic white ceramic bowl. The cheese is bubbly and golden-brown on top, reflecting warm lighting. High-definition food photography style with shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcphLX1C8zZHMHEVhD7DRrgKlFnoq2ktpjYWU4h0fvgIfHnjYVQviJfmQQesX6EWt4NbRkR-CS7xVDgFFIuIhxPaUXKI-ktBOvBT7rd5Id6ssPawIfKkTzBhlkflCf2ohzwead8eEGhJPTCpN3SP_z8OlrgoiR4Jh1jMqG7UYc2kyxnV4PN9z-4-fOCZL11PoQcU9n6_FvHesGTtqULPN5ToS5pW-UPh9nBUJLh0YEFIUD46AxI_ADQoBFKZ0KdTJ2iUhQDPO8upc"/>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Macaroni and Cheese</h3>
+<p class="font-body-sm text-body-sm text-text-secondary">Classic creamy style</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-stat-lg text-stat-lg text-primary">450</span>
+<span class="font-label-md text-label-md text-text-secondary block">kcal</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="font-label-md text-label-md text-text-secondary block mb-1">Serving Size</label>
+<div class="flex items-center gap-2">
+<input class="recessed-input w-24 font-body-md" onchange="updateTotals()" type="number" value="1"/>
+<span class="font-body-md text-text-secondary">Bowl (approx. 250g)</span>
+</div>
+</div>
+<div class="flex flex-col justify-end gap-2">
+<div class="flex gap-2">
+<div class="macro-chip bg-blue-50 text-blue-700">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                    P: 18g
+                                </div>
+<div class="macro-chip bg-green-50 text-green-700">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                    C: 45g
+                                </div>
+<div class="macro-chip bg-orange-50 text-orange-700">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span>
+                                    F: 22g
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Item Card: Fries -->
+<div class="tactile-card p-stack-md flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-xl bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Crispy golden French fries served in a simple paper cone. Some sea salt flakes are visible on the surface. The background is a clean, wooden table with soft side-lighting to highlight texture and crunch." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrjdVYvVeITD7uhj9GsV2XRk7OXK2l2_Auq7iddB6mUU9nqG_9jXidZIA0Cn-wWxtS3ZYj9DNCPsgyvOBbdxUtKdMbBQwJA9jdb_GadXbhY2Z9dKwqMI6cXbI4OKxs8FhXIwW8OsFZpb9-eZCNzzW6bt8xXhg6tcL9ejYXPv4RAHEfyD8fMSrn0X2lnow24zkJsC_Bm74b7LnjPFUmzLXhoMCi2t-hht5V41vIdNkNmuDyFg2d-2Hw7m1k4rw79DZbWmifeMESC8s"/>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Regular Fries</h3>
+<p class="font-body-sm text-body-sm text-text-secondary">Deep fried, lightly salted</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-stat-lg text-stat-lg text-primary">320</span>
+<span class="font-label-md text-label-md text-text-secondary block">kcal</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="font-label-md text-label-md text-text-secondary block mb-1">Serving Size</label>
+<div class="flex items-center gap-2">
+<input class="recessed-input w-24 font-body-md" onchange="updateTotals()" type="number" value="1"/>
+<span class="font-body-md text-text-secondary">Medium (117g)</span>
+</div>
+</div>
+<div class="flex flex-col justify-end gap-2">
+<div class="flex gap-2">
+<div class="macro-chip bg-blue-50 text-blue-700">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                    P: 4g
+                                </div>
+<div class="macro-chip bg-green-50 text-green-700">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                    C: 42g
+                                </div>
+<div class="macro-chip bg-orange-50 text-orange-700">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span>
+                                    F: 15g
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Item Card: Coke -->
+<div class="tactile-card p-stack-md flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-xl bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A refreshing glass of dark cola with ice cubes and condensation on the outside. A slice of lemon floats on top. Bright studio lighting creates crisp reflections on the glass surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkYTSOL8jt5GYPywmyze6VScj7hSNeh9sJb-m6_ca-tpeWMcQjWocBtTE0QYtv9iOk5sQ9_oqZVquIxFeNe7045FIrLDzOBZvOimUpndTFOsMIWcVkwEpNnZug5GnzO83r9Z2uhlylylh_Y-sPnjygN5SxTMEf5VRoqWcAJWB0zpSRbEHox5ziDqu5sZ8MwGUJcsyT5v7TKt-W0OfEINSgvmlMDkrOHTJZW-SUhOaabQq7jy6Y3uTKQ_4fgVSuN1C4fssiNDm_6FM"/>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Coca Cola</h3>
+<p class="font-body-sm text-body-sm text-text-secondary">Original Taste</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-stat-lg text-stat-lg text-primary">140</span>
+<span class="font-label-md text-label-md text-text-secondary block">kcal</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="font-label-md text-label-md text-text-secondary block mb-1">Serving Size</label>
+<div class="flex items-center gap-2">
+<input class="recessed-input w-24 font-body-md" onchange="updateTotals()" type="number" value="1"/>
+<span class="font-body-md text-text-secondary">Can (355ml)</span>
+</div>
+</div>
+<div class="flex flex-col justify-end gap-2">
+<div class="flex gap-2">
+<div class="macro-chip bg-blue-50 text-blue-700">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                    P: 0g
+                                </div>
+<div class="macro-chip bg-green-50 text-green-700">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                    C: 39g
+                                </div>
+<div class="macro-chip bg-orange-50 text-orange-700">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span>
+                                    F: 0g
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Pane: Total Meal Summary -->
+<div class="md:w-5/12">
+<div class="sticky top-[88px] flex flex-col gap-gutter">
+<div class="tactile-card p-gutter bg-white dark:bg-surface-dark border-2 border-primary/10">
+<h2 class="font-headline-md text-headline-md text-text-primary dark:text-surface-bright mb-6">Meal Summary</h2>
+<div class="flex flex-col items-center mb-8">
+<div class="relative w-48 h-48 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90">
+<circle class="text-surface-container" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-primary transition-all duration-1000" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="553" stroke-dashoffset="138" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-lg text-[48px] text-text-primary dark:text-surface-bright" id="total-calories">910</span>
+<span class="font-label-md text-label-md text-text-secondary uppercase tracking-widest">Total Calories</span>
+</div>
+</div>
+</div>
+<div class="space-y-6 mb-8">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-body-md font-semibold text-blue-700">Protein</span>
+<span class="font-body-md font-bold" id="total-protein">22g</span>
+</div>
+<div class="progress-channel">
+<div class="progress-bar bg-blue-500" id="protein-bar" style="width: 25%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-body-md font-semibold text-green-700">Carbohydrates</span>
+<span class="font-body-md font-bold" id="total-carbs">126g</span>
+</div>
+<div class="progress-channel">
+<div class="progress-bar bg-green-500" id="carbs-bar" style="width: 70%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-body-md font-semibold text-orange-700">Fat</span>
+<span class="font-body-md font-bold" id="total-fat">37g</span>
+</div>
+<div class="progress-channel">
+<div class="progress-bar bg-orange-500" id="fat-bar" style="width: 45%"></div>
+</div>
+</div>
+</div>
+<div class="p-stack-md bg-surface-container-low rounded-xl mb-8 flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary">info</span>
+<p class="font-body-sm text-body-sm text-text-secondary">This meal accounts for 45% of your daily calorie goal. Consider a lighter dinner.</p>
+</div>
+<button class="tactile-button w-full flex gap-2" onclick="confirmLog()">
+<span class="material-symbols-outlined">check_circle</span>
+                            Confirm Log All Items
+                        </button>
+</div>
+<div class="tactile-card p-stack-md bg-surface-bright border border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-text-secondary">Time of Meal</p>
+<p class="font-body-md font-bold">Lunch • 12:45 PM</p>
+</div>
+</div>
+<button class="text-primary font-label-md text-label-md hover:underline">Change</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Mobile Only -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-white/80 backdrop-blur-md border-t border-outline-variant shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-2xl px-4 py-1" href="#">
+<span class="material-symbols-outlined">fastfood</span>
+<span class="font-label-md text-label-md">Meals</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+<span class="font-label-md text-label-md">Stats</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        function updateTotals() {
+            // Simplified logic for simulation
+            const inputs = document.querySelectorAll('input[type="number"]');
+            let totalCal = 0;
+            let totalP = 0;
+            let totalC = 0;
+            let totalF = 0;
+
+            const baseValues = [
+                {cal: 450, p: 18, c: 45, f: 22}, // Mac
+                {cal: 320, p: 4, c: 42, f: 15},  // Fries
+                {cal: 140, p: 0, c: 39, f: 0}    // Coke
+            ];
+
+            inputs.forEach((input, index) => {
+                const multiplier = parseFloat(input.value) || 0;
+                totalCal += baseValues[index].cal * multiplier;
+                totalP += baseValues[index].p * multiplier;
+                totalC += baseValues[index].c * multiplier;
+                totalF += baseValues[index].f * multiplier;
+            });
+
+            // Update UI
+            document.getElementById('total-calories').innerText = Math.round(totalCal);
+            document.getElementById('total-protein').innerText = Math.round(totalP) + 'g';
+            document.getElementById('total-carbs').innerText = Math.round(totalC) + 'g';
+            document.getElementById('total-fat').innerText = Math.round(totalF) + 'g';
+
+            // Update Bars (capped at 100%)
+            document.getElementById('protein-bar').style.width = Math.min(100, (totalP / 80) * 100) + '%';
+            document.getElementById('carbs-bar').style.width = Math.min(100, (totalC / 180) * 100) + '%';
+            document.getElementById('fat-bar').style.width = Math.min(100, (totalF / 60) * 100) + '%';
+        }
+
+        function confirmLog() {
+            const btn = event.currentTarget;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Logging...';
+            btn.classList.add('opacity-80');
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check</span> Success!';
+                btn.classList.remove('bg-primary');
+                btn.classList.add('bg-secondary');
+                btn.style.background = '#006e2f';
+                
+                confettiEffect();
+            }, 1500);
+        }
+
+        function confettiEffect() {
+            // Simple visual feedback micro-interaction
+            console.log("Meal logged successfully!");
+        }
+    </script>
+</body></html>

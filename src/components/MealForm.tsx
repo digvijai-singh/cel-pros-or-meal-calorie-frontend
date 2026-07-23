@@ -26,8 +26,7 @@ const PRESET_SUGGESTIONS = [
 ];
 
 export function MealForm() {
-  const setTempResult = useMealStore((state) => state.setTempResult);
-  const router = useRouter();
+  const addToMeal = useMealStore((state) => state.addToMeal);
   const [apiError, setApiError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [retryCountdown, setRetryCountdown] = useState<number | null>(null);
@@ -74,8 +73,8 @@ export function MealForm() {
 
     try {
       const res = await getCalories(data);
-      setTempResult(res);
-      router.push("/calories/log");
+      addToMeal(res);
+      setValue("dish_name", "");
     } catch (error: any) {
       if (error instanceof ApiError) {
         if (error.status === 400) {
