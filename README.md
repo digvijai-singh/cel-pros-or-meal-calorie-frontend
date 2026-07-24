@@ -1,5 +1,9 @@
 # XcelPros – Meal Calorie Count Generator
 
+[![Vercel Deployment](https://img.shields.io/badge/Deployment-Vercel-success?style=for-the-badge&logo=vercel)](https://xcel-pros-e9tersu95-digvijai-singhs-projects.vercel.app)
+
+**Live Demo:** [https://xcel-pros-e9tersu95-digvijai-singhs-projects.vercel.app](https://xcel-pros-e9tersu95-digvijai-singhs-projects.vercel.app)
+
 A production-ready frontend application built using **Next.js 16+ App Router**, **TypeScript**, and **Tailwind CSS**. It connects to a live backend at `https://xpcc.devb.zeak.io` to manage authentication and retrieve real-time calorie lookup reports and nutrient ratios powered by USDA database records.
 
 ## Features

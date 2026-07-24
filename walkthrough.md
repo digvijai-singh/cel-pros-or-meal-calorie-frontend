@@ -1,5 +1,7 @@
 # Implementation Walkthrough – Meal Calorie Count Generator
 
+**Vercel Deployment URL:** [https://xcel-pros-e9tersu95-digvijai-singhs-projects.vercel.app](https://xcel-pros-e9tersu95-digvijai-singhs-projects.vercel.app)
+
 I have successfully built and verified the Next.js 14+ App Router, TypeScript, and Tailwind CSS/shadcn frontend application for the Meal Calorie Count Generator.
 
 ## Changes Made
