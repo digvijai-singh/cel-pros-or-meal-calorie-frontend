@@ -12,7 +12,8 @@ import {
   Activity, 
   Flame, 
   Zap, 
-  LineChart 
+  LineChart,
+  Search
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -68,7 +69,7 @@ export default function LogMealSuccessPage() {
             <nav className="space-y-1.5 pt-4">
               <button 
                 onClick={() => router.push("/dashboard")}
-                className="w-full flex items-center gap-3 px-4 py-3 bg-primary text-white rounded-2xl font-extrabold text-xs shadow-md transition-all cursor-pointer focus:outline-none"
+                className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-200/55 dark:hover:bg-slate-800 rounded-2xl font-bold text-xs transition-all cursor-pointer focus:outline-none text-left"
               >
                 <LayoutDashboard className="w-4.5 h-4.5" />
                 <span>Dashboard</span>
@@ -78,12 +79,20 @@ export default function LogMealSuccessPage() {
                 onClick={() => router.push("/calories")}
                 className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-200/55 dark:hover:bg-slate-800 rounded-2xl font-bold text-xs transition-all cursor-pointer focus:outline-none text-left"
               >
+                <Search className="w-4.5 h-4.5" />
+                <span>Calorie Lookup</span>
+              </button>
+              
+              <button 
+                onClick={() => router.push("/meals")}
+                className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-200/55 dark:hover:bg-slate-800 rounded-2xl font-bold text-xs transition-all cursor-pointer focus:outline-none text-left"
+              >
                 <Utensils className="w-4.5 h-4.5" />
                 <span>Meal Log</span>
               </button>
               
               <button 
-                onClick={() => router.push("/dashboard")}
+                onClick={() => router.push("/nutrition")}
                 className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-200/55 dark:hover:bg-slate-800 rounded-2xl font-bold text-xs transition-all cursor-pointer focus:outline-none text-left"
               >
                 <LineChart className="w-4.5 h-4.5" />
@@ -91,7 +100,7 @@ export default function LogMealSuccessPage() {
               </button>
               
               <button 
-                onClick={() => router.push("/dashboard")}
+                onClick={() => router.push("/settings")}
                 className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-200/55 dark:hover:bg-slate-800 rounded-2xl font-bold text-xs transition-all cursor-pointer focus:outline-none text-left"
               >
                 <Settings className="w-4.5 h-4.5" />

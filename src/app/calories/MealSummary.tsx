@@ -1,20 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMealStore } from "@/stores/mealStore";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { CheckCircle, Clock, Info, Coffee, Utensils, Moon, Activity } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function MealSummary() {
   const { currentMeal, logCurrentMeal } = useMealStore();
   const router = useRouter();
+  const searchParams = useSearchParams();
   
   const [time, setTime] = useState(() => {
     const now = new Date();
     return `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
   });
+  
+  const categoryParam = searchParams.get("category");
   const [category, setCategory] = useState("Lunch");
+  
+  useEffect(() => {
+    const validCategories = ["Breakfast", "Lunch", "Dinner", "Snack"];
+    if (categoryParam && validCategories.includes(categoryParam)) {
+      setCategory(categoryParam);
+    }
+  }, [categoryParam]);
+
   const [isLogging, setIsLogging] = useState(false);
 
   // Derived Totals
@@ -46,7 +57,7 @@ export function MealSummary() {
     
     // Simulate slight delay for tactile feedback
     setTimeout(() => {
-      logCurrentMeal(time);
+      logCurrentMeal(time, category);
       setIsLogging(false);
       router.push("/calories/log/success");
     }, 1000);

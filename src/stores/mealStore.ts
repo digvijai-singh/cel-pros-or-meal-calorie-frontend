@@ -29,7 +29,10 @@ interface MealState {
   removeFromMeal: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearMeal: () => void;
-  logCurrentMeal: (timeString: string) => void;
+  logCurrentMeal: (timeString: string, category: string) => void;
+  waterIntake: number;
+  addWater: () => void;
+  resetWater: () => void;
 }
 
 const getFoodImage = (name: string): string => {
@@ -37,8 +40,14 @@ const getFoodImage = (name: string): string => {
   if (n.includes("mac") || n.includes("cheese") || n.includes("pasta")) {
     return "https://lh3.googleusercontent.com/aida-public/AB6AXuDcphLX1C8zZHMHEVhD7DRrgKlFnoq2ktpjYWU4h0fvgIfHnjYVQviJfmQQesX6EWt4NbRkR-CS7xVDgFFIuIhxPaUXKI-ktBOvBT7rd5Id6ssPawIfKkTzBhlkflCf2ohzwead8eEGhJPTCpN3SP_z8OlrgoiR4Jh1jMqG7UYc2kyxnV4PN9z-4-fOCZL11PoQcU9n6_FvHesGTtqULPN5ToS5pW-UPh9nBUJLh0YEFIUD46AxI_ADQoBFKZ0KdTJ2iUhQDPO8upc";
   }
-  if (n.includes("burger") || n.includes("sandwich") || n.includes("slider") || n.includes("toast")) {
+  if (n.includes("burger") || n.includes("slider")) {
     return "https://lh3.googleusercontent.com/aida-public/AB6AXuCuRtVs8TJf0sBkZwYaDqSRwRr-int5xEWnTLvt6hH1RCGPW3cq_jVeEvPaFUIjR96VrWtEuulOmQBzVDjB--6CX4LBNqWJpzi8i5AcRQS1tGLisG10WITwyileU7BlTj2RmXzeNnL6rO8EcxSXjwA0f9FIrjU9c55ksgl4YP7yuuin-H-kt_kiMtvSMT7LtIoQ95p6xUVktfVSTy3jhiPsQoPG_6gvnrOkDs8iETzitp9XcdwsfqVBnXJPFNpQYhT9Vj_N9iweaT8";
+  }
+  if (n.includes("sandwich")) {
+    return "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&q=80&w=200";
+  }
+  if (n.includes("toast") || n.includes("bread") || n.includes("bagel") || n.includes("croissant")) {
+    return "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=200";
   }
   if (n.includes("fry") || n.includes("fries") || n.includes("potato") || n.includes("chips")) {
     return "https://lh3.googleusercontent.com/aida-public/AB6AXuCrjdVYvVeITD7uhj9GsV2XRk7OXK2l2_Auq7iddB6mUU9nqG_9jXidZIA0Cn-wWxtS3ZYj9DNCPsgyvOBbdxUtKdMbBQwJA9jdb_GadXbhY2Z9dKwqMI6cXbI4OKxs8FhXIwW8OsFZpb9-eZCNzzW6bt8xXhg6tcL9ejYXPv4RAHEfyD8fMSrn0X2lnow24zkJsC_Bm74b7LnjPFUmzLXhoMCi2t-hht5V41vIdNkNmuDyFg2d-2Hw7m1k4rw79DZbWmifeMESC8s";
@@ -135,7 +144,11 @@ export const useMealStore = create<MealState>()(
 
       clearMeal: () => set({ currentMeal: [] }),
 
-      logCurrentMeal: (timeString) =>
+      waterIntake: 0,
+      addWater: () => set((state) => ({ waterIntake: (state.waterIntake || 0) + 1 })),
+      resetWater: () => set({ waterIntake: 0 }),
+
+      logCurrentMeal: (timeString, category) =>
         set((state) => {
           if (state.currentMeal.length === 0) return {};
 
@@ -178,6 +191,7 @@ export const useMealStore = create<MealState>()(
               data_type: "Compiled Meal",
               published_date: new Date().toLocaleDateString(),
             },
+            category,
             timestamp: (() => {
               const d = new Date();
               if (timeString) {
@@ -197,7 +211,44 @@ export const useMealStore = create<MealState>()(
     }),
     {
       name: "meal-storage",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => ({
+        getItem: (name) => {
+          if (typeof window === "undefined") return null;
+          const authData = localStorage.getItem("auth-storage");
+          let email = "anonymous";
+          if (authData) {
+            try {
+              const parsed = JSON.parse(authData);
+              email = parsed?.state?.user?.email || "anonymous";
+            } catch (e) {}
+          }
+          return localStorage.getItem(`${name}-${email}`);
+        },
+        setItem: (name, value) => {
+          if (typeof window === "undefined") return;
+          const authData = localStorage.getItem("auth-storage");
+          let email = "anonymous";
+          if (authData) {
+            try {
+              const parsed = JSON.parse(authData);
+              email = parsed?.state?.user?.email || "anonymous";
+            } catch (e) {}
+          }
+          localStorage.setItem(`${name}-${email}`, value);
+        },
+        removeItem: (name) => {
+          if (typeof window === "undefined") return;
+          const authData = localStorage.getItem("auth-storage");
+          let email = "anonymous";
+          if (authData) {
+            try {
+              const parsed = JSON.parse(authData);
+              email = parsed?.state?.user?.email || "anonymous";
+            } catch (e) {}
+          }
+          localStorage.removeItem(`${name}-${email}`);
+        }
+      })),
     }
   )
 );

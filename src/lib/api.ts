@@ -88,9 +88,26 @@ export async function login(payload: LoginInput): Promise<AuthResponse> {
   });
 }
 
+import { getFallbackNutrition } from "./nutritionFallback";
+
 export async function getCalories(payload: MealFormInput): Promise<CalorieResult> {
-  return apiFetch("/api/get-calories", {
-    method: "POST",
-    body: JSON.stringify(payload),
-  });
+  const normName = payload.dish_name.trim().toLowerCase();
+  
+  // Intercept zero-calorie items directly to bypass incorrect live API values
+  const zeroCalorieItems = ["water", "plain water", "sparkling water", "club soda", "tap water", "ice water", "diet coke", "diet soda", "coke zero"];
+  if (zeroCalorieItems.includes(normName)) {
+    return getFallbackNutrition(payload.dish_name, payload.servings || 1);
+  }
+
+  try {
+    return await apiFetch("/api/get-calories", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  } catch (error) {
+    if (error instanceof ApiError && (error.status === 404 || error.status === 422)) {
+      return getFallbackNutrition(payload.dish_name, payload.servings || 1);
+    }
+    throw error;
+  }
 }

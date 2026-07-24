@@ -53,4 +53,5 @@ export interface CalorieResult {
   ingredient_breakdown: IngredientBreakdownItem[];
   matched_food: MatchedFood;
   timestamp?: string; // Add clientside timestamp for history
+  category?: string; // Add clientside category (Breakfast, Lunch, Dinner, Snack)
 }

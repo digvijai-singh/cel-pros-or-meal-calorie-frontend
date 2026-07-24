@@ -1,7 +1,7 @@
 "use client";
 
 import { useMealStore, MealBuilderItem } from "@/stores/mealStore";
-import { Plus, Minus, X } from "lucide-react";
+import { Plus, Minus, X, Utensils } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function MealSelectedItems() {
@@ -20,9 +20,7 @@ export function MealSelectedItems() {
   if (currentMeal.length === 0) {
     return (
       <div className="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-[20px] p-8 text-center text-slate-500 dark:text-slate-400 min-h-[220px] flex flex-col justify-center items-center">
-        <span className="material-symbols-outlined text-4xl text-slate-400 dark:text-slate-600 mb-2">
-          restaurant_menu
-        </span>
+        <Utensils className="w-10 h-10 text-slate-400 dark:text-slate-600 mb-2" />
         <p className="text-sm font-bold text-slate-700 dark:text-slate-250">No items added to this meal yet</p>
         <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
           Search for food above and they will appear here to build your meal.

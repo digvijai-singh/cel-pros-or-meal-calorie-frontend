@@ -11,18 +11,102 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 const PRESET_SUGGESTIONS = [
-  "Grilled Salmon",
-  "Paneer Butter Masala",
-  "Chicken Biryani",
+  // Breakfast
   "Avocado Toast",
-  "Caesar Salad",
   "Oatmeal",
-  "Protein Shake",
   "Greek Yogurt",
-  "Mixed Nuts",
+  "Protein Shake",
+  "Scrambled Eggs",
+  "French Toast",
+  "Pancakes",
+  "Belgian Waffles",
+  "Banana Bread",
+  "Fruit Smoothie",
+  "Chia Pudding",
+  "Boiled Eggs",
+  "Eggs Benedict",
+  "Granola with Milk",
+
+  // Salads & Healthy Appetizers
+  "Caesar Salad",
+  "Mixed Salad",
+  "Greek Salad",
+  "Quinoa Salad",
+  "Cobb Salad",
+  "Caprese Salad",
+  "Hummus with Pita",
+  "Fruit Salad",
+  "Edamame",
+
+  // Soups
+  "Tomato Soup",
+  "Chicken Noodle Soup",
+  "Lentil Soup",
+  "Miso Soup",
+  "Minestrone Soup",
+
+  // Indian Cuisines
+  "Chicken Biryani",
+  "Paneer Butter Masala",
   "Butter Chicken",
   "Garlic Naan",
-  "Mixed Salad"
+  "Palak Paneer",
+  "Chana Masala",
+  "Aloo Gobi",
+  "Samosa",
+  "Tandoori Chicken",
+  "Dal Makhani",
+  "Idli with Chutney",
+  "Masala Dosa",
+
+  // Western Mains
+  "Grilled Salmon",
+  "Chicken Breast",
+  "Ribeye Steak",
+  "Beef Burger",
+  "Margherita Pizza",
+  "Pepperoni Pizza",
+  "Spaghetti Carbonara",
+  "Lasagna",
+  "Mac and Cheese",
+  "Fish and Chips",
+  "Roast Chicken",
+  "Grilled Cheese Sandwich",
+  "BBQ Pork Ribs",
+
+  // Asian Cuisines
+  "Chicken Pad Thai",
+  "Sushi Roll (California)",
+  "Ramen Noodle Soup",
+  "Fried Rice (Chicken)",
+  "Spring Rolls",
+  "Dim Sum",
+  "Kung Pao Chicken",
+  "Sweet and Sour Pork",
+
+  // Mexican Cuisines
+  "Chicken Tacos",
+  "Beef Burrito",
+  "Cheese Quesadilla",
+  "Guacamole and Chips",
+  "Fajitas (Chicken)",
+
+  // Snacks & Desserts
+  "Mixed Nuts",
+  "Apple with Peanut Butter",
+  "Dark Chocolate",
+  "Protein Bar",
+  "Chocolate Chip Cookie",
+  "Apple Pie",
+  "Vanilla Ice Cream",
+  "Cheesecake",
+
+  // Drinks
+  "Black Coffee",
+  "Green Tea",
+  "Orange Juice",
+  "Diet Coke",
+  "Whey Protein Shake"
 ];
 
 export function MealForm() {
@@ -149,7 +233,7 @@ export function MealForm() {
                 className="absolute left-0 w-full z-50 mt-2 bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 rounded-xl shadow-[0_15px_35px_rgba(15,23,42,0.12)] dark:shadow-[0_15px_35px_rgba(0,0,0,0.6)] overflow-hidden"
               >
                 <div className="p-1 space-y-0.5 max-h-48 overflow-y-auto scroller">
-                  {filteredSuggestions.map((suggestion) => (
+                  {filteredSuggestions.slice(0, 8).map((suggestion) => (
                     <button
                       key={suggestion}
                       type="button"

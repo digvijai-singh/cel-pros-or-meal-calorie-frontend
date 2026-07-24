@@ -36,8 +36,8 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col transition-colors duration-200 antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Header />

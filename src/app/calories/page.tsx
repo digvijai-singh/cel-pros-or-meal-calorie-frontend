@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useAuthGuard } from "@/hooks/useAuthGuard";
 import { useMealStore } from "@/stores/mealStore";
 import { MealForm } from "@/components/MealForm";
@@ -49,10 +50,10 @@ export default function CaloriesPage() {
       </motion.div>
 
       {/* Main Grid Layout (Stitch 60/40 Split Panel) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
         
         {/* Left Pane (7 columns): Search input & Selected Items list */}
-        <div className="lg:col-span-7 space-y-6">
+        <div className="md:col-span-7 space-y-6">
           <MealForm />
           
           <div className="space-y-3">
@@ -64,8 +65,14 @@ export default function CaloriesPage() {
         </div>
 
         {/* Right Pane (5 columns): Total Meal Summary, Macros & Log CTA */}
-        <div className="lg:col-span-5">
-          <MealSummary />
+        <div className="md:col-span-5">
+          <Suspense fallback={
+            <div className="skeuo-card p-6 bg-white dark:bg-slate-900 border border-slate-200/20 dark:border-slate-800/30 rounded-[20px] shadow-md h-96 flex items-center justify-center">
+              <Loader2 className="w-6 h-6 animate-spin text-primary" />
+            </div>
+          }>
+            <MealSummary />
+          </Suspense>
         </div>
 
       </div>
